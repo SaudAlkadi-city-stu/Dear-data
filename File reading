@@ -1,0 +1,54 @@
+String[] lines;
+
+String[] dates = new String[100];
+String[][] foods = new String[100][100];
+int[][] calories = new int[100][100];
+int[] foodCount = new int[100];
+
+int dateCount = 0;
+
+void setup() {
+  size(600, 400);
+
+  lines = loadStrings("food.txt");
+
+  int currentDate = -1;
+
+  for (int i = 0; i < lines.length; i++) {
+
+    String line = trim(lines[i]);
+
+    if (line.equals("")) {
+      continue;
+    }
+
+    if (!line.contains(",")) {
+      dates[dateCount] = line;
+      currentDate = dateCount;
+      dateCount++;
+    } else {
+      String[] parts = split(line, ',');
+
+      foods[currentDate][foodCount[currentDate]] = parts[0];
+      calories[currentDate][foodCount[currentDate]] = int(parts[1]);
+
+      foodCount[currentDate]++;
+    }
+  }
+
+  for (int i = 0; i < dateCount; i++) {
+
+    println(dates[i]);
+
+    int total = 0;
+
+    for (int j = 0; j < foodCount[i]; j++) {
+      println(foods[i][j] + " - " + calories[i][j] + " calories");
+
+      total = total + calories[i][j];
+    }
+
+    println("Total: " + total + " calories");
+    println("");
+  }
+}
