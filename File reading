@@ -65,7 +65,7 @@ void setup() {
     float circleSize = map(totals[i], 0, 3000, 37, 63);
     circleSize = constrain(circleSize, 37, 63);
 
-    fill(100, 150, 220);
+    fill(random(255), random(255), random(255));
     ellipse(x, y, circleSize, circleSize);
 
     fill(0);
